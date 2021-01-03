@@ -2,10 +2,10 @@
 # 项目入口
 from flask import Flask
 import json
-from xWash.conf.allowList import allowList
-from xWash.controller.factory import *
-from xWash.conf.config import config
-from xWash.Checker import Soda_Checker, UClean_Checker
+from conf.allowList import allowList
+from controller.factory import *
+from conf.config import config
+from Checker import Soda_Checker, UClean_Checker
 from flask_apscheduler import APScheduler
 import pymysql
 
@@ -24,7 +24,7 @@ def preventEvil(s):
 def hello_world():
     return 'Hello World! message from xWash!'
 
-
+# 测试用
 @app.route("/update/<building>")
 def update(building):
     '''
@@ -62,7 +62,7 @@ def scnu(school,building):
 
     return str(controller.getAll())
 
-
+# 旧接口
 @app.route('/api/all')
 def getAll():
     # 新建controller

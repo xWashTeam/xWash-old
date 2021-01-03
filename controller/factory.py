@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from xWash.controller.baseController import *
+from controller.baseController import *
 class factory:
     db = None
     def __init__(self,db):

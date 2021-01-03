@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
-from xWash.Checker.Soda_Checker import *
-from xWash.Checker.UClean_Checker import *
+from Checker.Soda_Checker import *
+from Checker.UClean_Checker import *
 import pymysql
 import os
 
