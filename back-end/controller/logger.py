@@ -8,11 +8,13 @@ class logger:
     path = None
     fh = None # fileHandler
 
-    def __init__(self):
+    def __init__(self,path = None):
         self.logger = logging.getLogger()
         self.logger.setLevel(logging.INFO)
         self.date = time.strftime('%Y%m%d', time.localtime(time.time()))
-        self.init()
+        self.init(path=path)
+        if (path == None):
+            self.path = os.path.dirname(os.getcwd()) + '/logs/'
 
     def init(self,path = None,filename=None):
         '''
@@ -22,10 +24,10 @@ class logger:
         '''
         if(filename == None):
             filename = self.date  # 当前时间
-        if(path == None):
-            self.path = os.path.dirname(os.getcwd()) + '/logs/'
+        if (path == None):
+            path = self.path
 
-        logFile = self.path + filename + '.log'
+        logFile = path + filename + '.log'
         self.fh = logging.FileHandler(logFile, mode="a")
         self.fh.setLevel("INFO")
         # 定义handler的输出格式
@@ -50,6 +52,8 @@ class logger:
         if(self.isNewDay()):
             self.newDayProcess()
         self.logger.info(text)
+
+
 
 if __name__ == '__main__':
     log = logger()
