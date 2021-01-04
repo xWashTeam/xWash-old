@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
 # 项目入口
+import os
+
 from flask import Flask
 import json
 from conf.allowList import allowList
 from controller.factory import *
+from controller.logger import *
 from conf.config import config
 from Checker import Soda_Checker, UClean_Checker
 from flask_apscheduler import APScheduler
 import pymysql
 
+logger = logger()
 db = pymysql.connect(config["sqlUrl"],config["user"],config["passwd"],config["database"])
 scheduler = APScheduler()
 app = Flask(__name__)
@@ -33,9 +37,7 @@ def update(building):
     :return: 更新成功与否
     '''
 
-
-    print("update"+building)
-    # TODO logging
+    logger.info("更新" + building + "数据")
 
     # 新建controller
     fc = factory(db)
@@ -77,5 +79,9 @@ if __name__ == '__main__':
     scheduler.init_app(app=app)
     scheduler.add_job(func=update, id='1', args=("D19",), trigger='interval', seconds=config['autoUpdateTime'], replace_existing=True)
     scheduler.start()
+
+    # 设置日志路径
+    logger.init(path=os.getcwd() + '/back-end/logs/')
+
     # 开启服务
     app.run("0.0.0.0",port=5000,debug=False)
