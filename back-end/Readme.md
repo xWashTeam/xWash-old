@@ -6,7 +6,7 @@
 
 - 安装依赖 : `pip install -r requirements.txt`
 
-- mysql版本 : `mysql 8.02`
+- mysql版本 : `mysql 8.0.22`
 
 - 建表 `source xWash.sql`
 
@@ -31,3 +31,13 @@
 
 ## 路由
 
+- ~~`/api/all` : 旧端口, 用于临时调试~~
+
+- `/<school>/<building>` : 
+  - 格式 : /学校/宿舍楼
+  - ex. /scnu/D19
+
+## TODO
+
+- [ ] 将`/conf/allowList`的格式更改为包含学校的格式
+- [ ] and so on...
